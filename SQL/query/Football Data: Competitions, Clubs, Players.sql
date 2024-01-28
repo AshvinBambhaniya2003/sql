@@ -31,7 +31,6 @@ LIMIT 1;
 -- 3
 
 SELECT
-    player_id,
     player_name,
     SUM(minutes_played) AS total_minutes_played,
     RANK() OVER (ORDER BY SUM(minutes_played) DESC) AS player_rank
@@ -48,7 +47,7 @@ LIMIT 10;
 SELECT
     clubs.club_code,
     SUM(club_games.is_win) AS total_won_games,
-    RANK() OVER (ORDER BY SUM(club_games.is_win) DESC) AS club_rank
+    DENSE_RANK() OVER (ORDER BY SUM(club_games.is_win) DESC) AS club_rank
 FROM
     clubs
 JOIN
